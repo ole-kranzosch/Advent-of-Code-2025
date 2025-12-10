@@ -1,7 +1,4 @@
 clear; close all;
-if isempty(gcp('nocreate'))
-parpool("threads")
-end
 %% Read input
 inp = readlines("input.txt");
 N = size(inp,1);
@@ -22,6 +19,7 @@ for i = 1:N
     iters = decimalToBinaryVector(1:2^M-1);
     [~,pt] = sort(sum(iters,2));
     iters = iters(pt,:);
+    b = 0;
     for k = 1:2^M-1
         idx = find(flip(iters(k,:)));
         for p = 1:numel(idx)
@@ -38,7 +36,7 @@ for i = 1:N
             end
         end
     end
-
+    
 end
 fprintf('Part 1 Solution: %d \n', sum(presses));
 %% Part 2
